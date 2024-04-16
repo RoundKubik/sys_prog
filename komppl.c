@@ -1305,9 +1305,9 @@ int AVI2 ()
       strcpy ( ASS_CARD._BUFCARD.OPERAND, "@RRAB," );
       strcat ( ASS_CARD._BUFCARD.OPERAND, FORMT [0]);
       ASS_CARD._BUFCARD.OPERAND [ strlen( ASS_CARD._BUFCARD.OPERAND ) ] = ' ';
-      strcpy ( ASS_CARD._BUFCARD.OPERAND, "Загрузка " );
-      strcat ( ASS_CARD._BUFCARD.OPERAND, SYM[i].NAME );
-      strcat ( ASS_CARD._BUFCARD.OPERAND, " в регистр @RRAB");
+      strcpy ( ASS_CARD._BUFCARD.COMM, "Загрузка " );
+      strcat ( ASS_CARD._BUFCARD.COMM, SYM[i].NAME );
+      strcat ( ASS_CARD._BUFCARD.COMM, " в регистр @RRAB");
       ZKARD ();
 
       strcat(RABB_COMM, SYM[i].NAME);
@@ -1622,7 +1622,7 @@ int OEN2 ()
           ASS_CARD._BUFCARD.METKA [ strlen( ASS_CARD._BUFCARD.METKA ) ] = ' ';
           memcpy ( ASS_CARD._BUFCARD.OPERAC, "DS", 2 );
           strcpy ( ASS_CARD._BUFCARD.OPERAND, "E" );
-	        memcpy ( ASS_CARD._BUFCARD.COMM, "Резерв памяти для ", 17 ); 
+	        strcpy ( ASS_CARD._BUFCARD.COMM, " Резерв памяти для "); 
           strcat(ASS_CARD._BUFCARD.COMM, SYM [i].NAME);
 	        ZKARD ();     
         }
@@ -1668,7 +1668,7 @@ int OEN2 ()
 
   ZKARD ();                                       /* запоминание ее         */
 
-  memcpy ( ASS_CARD._BUFCARD.METKA, "@RVX", 5 );  
+  memcpy ( ASS_CARD._BUFCARD.METKA, "@RVX", 4 );  
   memcpy ( ASS_CARD._BUFCARD.OPERAC, "EQU",3 );  
   memcpy ( ASS_CARD._BUFCARD.OPERAND, "14", 2 );
   strcpy ( ASS_CARD._BUFCARD.COMM, "@RRAB назначим 14"); 
