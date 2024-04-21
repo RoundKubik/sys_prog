@@ -306,6 +306,7 @@ struct
  {/*.  136     .*/   137 ,     0 , "CIF" ,    0 },
  {/*.  137     .*/   138 ,   136 , "RZR" ,    0 },
  {/*.  138     .*/     0 ,     0 , "*  " ,    0 },
+ /////////////////////////////////////////////////////////////////////////////
   /*                                               вход с символа - RZR    */
  {/*.  139     .*/   140 ,     0 , "RZR" ,    0 },
  {/*.  140     .*/   141 ,   139 , "CIF" ,    228 },
@@ -1292,8 +1293,8 @@ int AVI2 ()
 	    ASS_CARD._BUFCARD.OPERAND [ strlen    /* вставляем разделитель  */
 	     ( ASS_CARD._BUFCARD.OPERAND ) ] = ' ';
 
-	    memcpy ( ASS_CARD._BUFCARD.COMM,      /* и построчный коментарий*/
-	     "Загрузка переменной в регистр", 29 );
+	    strcpy ( ASS_CARD._BUFCARD.COMM,      /* и построчный коментарий*/
+	     "Загрузка переменной в рег�" );
 
 	    ZKARD ();                             /* запомнить операцию ас- */
 						  /* семблера  и            */
@@ -1307,7 +1308,7 @@ int AVI2 ()
       ASS_CARD._BUFCARD.OPERAND [ strlen( ASS_CARD._BUFCARD.OPERAND ) ] = ' ';
       strcpy ( ASS_CARD._BUFCARD.COMM, "Загрузка " );
       strcat ( ASS_CARD._BUFCARD.COMM, SYM[i].NAME );
-      strcat ( ASS_CARD._BUFCARD.COMM, " в регистр @RRAB");
+      strcat ( ASS_CARD._BUFCARD.COMM, " в рег�");
       ZKARD ();
 
       strcat(RABB_COMM, SYM[i].NAME);
@@ -1411,7 +1412,7 @@ int AVI2 ()
 	    ASS_CARD._BUFCARD.OPERAND [ strlen( ASS_CARD._BUFCARD.OPERAND )] = ' ';
       strcat (RABB_COMM, FORMT [IFORMT-1]);
       strcpy ( ASS_CARD._BUFCARD.COMM, RABB_COMM );
-      strcat ( ASS_CARD._BUFCARD.COMM, " грузим в @RRAB" );
+      strcat ( ASS_CARD._BUFCARD.COMM, " грузим �" );
       ZKARD ();
       return 0;
     }
@@ -1563,8 +1564,8 @@ int OEN2 ()
 
   memcpy ( ASS_CARD._BUFCARD.OPERAND,"15,@RVIX", 8 );/* операнды команды и     */
 
-  strcpy ( ASS_CARD._BUFCARD.COMM,                /* поле построчного комен-*/
-		       "Переход по адр. в рег. @RVIX");/* тария                  */
+  memcpy ( ASS_CARD._BUFCARD.COMM,                /* поле построчного комен-*/
+		       "Переход по адр. в рег. @RVIX", 28);/* тария                  */
 
   ZKARD ();                                       /* запомнить опреацию     */
 						  /* Ассемблера             */
@@ -1655,7 +1656,7 @@ int OEN2 ()
   memcpy ( ASS_CARD._BUFCARD.OPERAND, "4", 1 );  /* номера базового регист-*/
 						  /* ра общего назначения   */
 						  /*           и            */
-  strcpy ( ASS_CARD._BUFCARD.COMM, "@RBASE назначим 4" ); 
+  memcpy ( ASS_CARD._BUFCARD.COMM, "@RBASE назначим 4", 17); 
 
   ZKARD ();                                       /* запоминание ее         */
 
@@ -1664,14 +1665,14 @@ int OEN2 ()
   memcpy ( ASS_CARD._BUFCARD.OPERAND, "2", 1 );   /* номера базового регист-*/
 						  /* ра общего назначения   */
 						  /*            и           */
-  strcpy ( ASS_CARD._BUFCARD.COMM, "@RRAB назначим 2"); 
+  memcpy ( ASS_CARD._BUFCARD.COMM, "@RRAB назначим 2", 16); 
 
   ZKARD ();                                       /* запоминание ее         */
 
   memcpy ( ASS_CARD._BUFCARD.METKA, "@RVX", 4 );  
   memcpy ( ASS_CARD._BUFCARD.OPERAC, "EQU",3 );  
   memcpy ( ASS_CARD._BUFCARD.OPERAND, "14", 2 );
-  strcpy ( ASS_CARD._BUFCARD.COMM, "@RRAB назначим 14"); 
+  memcpy ( ASS_CARD._BUFCARD.COMM, "@RRAB назначим 14", 17); 
   ZKARD ();  
 
   memcpy ( ASS_CARD._BUFCARD.OPERAC, "END", 3 );  /* формирование кода ас-  */
@@ -1683,7 +1684,7 @@ int OEN2 ()
   // ASS_CARD._BUFCARD.OPERAND [i] = FORMT [1][i++];/*         и              */
 
   strcpy ( ASS_CARD._BUFCARD.COMM,                /* построчного коментария */
-			  "Конец текста блока");
+			  "Конец тек�\n");
 
   ZKARD ();                                       /* запоминание псевдоопе- */
 						  /* рации                  */
@@ -1750,8 +1751,8 @@ int OPA2 ()
       strcat ( ASS_CARD._BUFCARD.OPERAND, FORMT [0]) ;
       ASS_CARD._BUFCARD.OPERAND [ strlen( ASS_CARD._BUFCARD.OPERAND ) ] = ' ';
       strcpy ( ASS_CARD._BUFCARD.COMM, RABB_COMM );
-      strcat ( ASS_CARD._BUFCARD.COMM, " из @RRAB грузим в " );
-      strcat ( ASS_CARD._BUFCARD.COMM, FORMT [0]);
+      strcat ( ASS_CARD._BUFCARD.COMM, " из @RRAB грузим в �" );
+      //strcat ( ASS_CARD._BUFCARD.COMM, FORMT [0]);
 	    ZKARD ();
 
       RABB_COMM[0] = '\0';
@@ -1796,22 +1797,22 @@ int OPR2 ()
 
   memcpy ( ASS_CARD._BUFCARD.OPERAC, "START", 5 );/* достраиваем код и опе- */
   memcpy ( ASS_CARD._BUFCARD.OPERAND, "0", 1 );   /* ранды  в  START-псевдо-*/
-  strcpy ( ASS_CARD._BUFCARD.COMM,                /* операции Ассемблера    */
-		      "cчётчик отн. адреса в нуль");
+  memcpy ( ASS_CARD._BUFCARD.COMM,                /* операции Ассемблера    */
+		      "cчётчик отн. адреса в нуль", 27);
   ZKARD ();                                       /* запоминаем карту Ассем-*/
 						  /* блера                  */
 
   memcpy ( ASS_CARD._BUFCARD.OPERAC, "BALR", 4 ); /* формируем BALR-операцию*/
   memcpy ( ASS_CARD._BUFCARD.OPERAND,             /* Ассемблера             */
 				  "@RBASE,0", 8 );
-  strcpy ( ASS_CARD._BUFCARD.COMM, "отн. адр. базы в @RBASE");
+  memcpy ( ASS_CARD._BUFCARD.COMM, "отн. адр. базы в @RBASE", 23);
   ZKARD ();                                       /* и запоминаем ее        */
 
   memcpy ( ASS_CARD._BUFCARD.OPERAC, "USING", 5 );/* формируем USING-псевдо-*/
   memcpy ( ASS_CARD._BUFCARD.OPERAND,             /* операцию Ассемблера    */
 				   "*,@RBASE", 8 );
-  strcpy ( ASS_CARD._BUFCARD.COMM,
-		  "Объявл. @RBASE регистром базы");
+  memcpy ( ASS_CARD._BUFCARD.COMM,
+		  "Объявл. @RBASE регистром базы", 29);
   ZKARD ();                                       /* и запоминаем ее        */
 
   return 0;                                       /* завершить подпрограмму */
